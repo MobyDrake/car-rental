@@ -1,0 +1,15 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: inventory-service
+  graphql:
+    graphiql:
+      enabled: true
+  grpc:
+    client:
+      enable: false
+    server:
+      enable: true
+  jpa:
+    defer-datasource-initialization: true

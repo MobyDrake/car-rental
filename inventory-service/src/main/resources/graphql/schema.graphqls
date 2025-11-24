@@ -1,0 +1,21 @@
+type Query {
+    cars: [Car]
+    carById(id: ID!): Car
+}
+
+type Mutation {
+    registry(car: CarCreate!): Car!
+}
+
+type Car {
+    id: ID!
+    licensePlateNumber: String!
+    manufacturer: String!
+    model: String!
+}
+
+input CarCreate {
+    licensePlateNumber: String!
+    manufacturer: String!
+    model: String!
+}
