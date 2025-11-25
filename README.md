@@ -1,6 +1,6 @@
 # The service offers car rental
 
-The idea came from the book "Štefanko Martin, Martiška Jan - Quarkus in Action - 2025", and the implementation was carried out on the Spring platform. The goal is to check whether the implementation described in the book can be performed in Quarkus using traditional methods.
+The idea came from the book [Štefanko Martin, Martiška Jan - Quarkus in Action - 2025](https://developers.redhat.com/e-books/quarkus-action?extIdCarryOver=true&sc_cid=RHCTG0180000371695), and the implementation was carried out on the `Spring` platform. The goal is to check whether the implementation described in the book can be performed in `Quarkus` using traditional methods.
 
 ### The service consists of six components:
 
