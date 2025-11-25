@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public record ReservationDto(Long id,
                              Long carId,
-                             LocalDate startDay,
-                             LocalDate endDay,
+                             LocalDate startDate,
+                             LocalDate endDate,
                              String userId) {
 }

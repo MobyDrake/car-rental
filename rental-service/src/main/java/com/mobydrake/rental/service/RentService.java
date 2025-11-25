@@ -6,6 +6,7 @@ import com.mobydrake.rental.reservation.ReservationClient;
 import com.mobydrake.rental.entity.Rental;
 import com.mobydrake.rental.repository.RentalRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -26,6 +27,7 @@ public class RentService {
 
     private final RentalRepository rentalRepository;
     private final ReservationClient reservationClient;
+    private final NewTopic invoicesAdjustTopic;
     private final KafkaTemplate<String, InvoiceAdjustEvent> kafkaTemplate;
 
     @Transactional
@@ -56,7 +58,7 @@ public class RentService {
             log.info("Adjusting price for rental {}. Original reservation end day was {}.", rental, reservation.endDay());
             double price = computePrice(reservation.endDay(), actualEndDate);
             InvoiceAdjustEvent event = new InvoiceAdjustEvent(rental.getId(), rental.getUserId(), actualEndDate, price);
-            kafkaTemplate.send("invoices-adjust", event);
+            kafkaTemplate.send(invoicesAdjustTopic.name(), event);
         }
         rental.setEndDate(actualEndDate);
         rental.setActive(false);

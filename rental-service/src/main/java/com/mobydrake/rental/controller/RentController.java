@@ -19,13 +19,15 @@ public class RentController {
     private final RentService rentService;
 
     @PostMapping("/start/{userId}/{reservationId}")
-    public Rental start(String userId, Long reservationId) {
+    public Rental start(@PathVariable String userId,
+                        @PathVariable Long reservationId) {
         log.info("Starting rental for {}, with reservation {}", userId, reservationId);
         return rentService.startRent(userId, reservationId);
     }
 
     @PutMapping("/end/{userId}/{reservationId}")
-    public Rental end(String userId, Long reservationId) {
+    public Rental end(@PathVariable String userId,
+                      @PathVariable Long reservationId) {
         log.info("Ending rental for {} with reservation {}", userId, reservationId);
         return rentService.endRent(userId, reservationId);
     }

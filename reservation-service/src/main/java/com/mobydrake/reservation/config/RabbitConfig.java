@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     @Bean
-    Queue queue() {
+    Queue invoicesRequestQueue() {
         return new Queue("invoices-request", true, false, false);
     }
 

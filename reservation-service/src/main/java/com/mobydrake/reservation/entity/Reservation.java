@@ -25,10 +25,10 @@ public class Reservation {
     private Long carId;
 
     @Column
-    private LocalDate startDay;
+    private LocalDate startDate;
 
     @Column
-    private LocalDate endDay;
+    private LocalDate endDate;
 
     @Column
     private String userId;

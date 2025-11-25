@@ -1,6 +1,5 @@
 package com.mobydrake.inventory.service;
 
-
 import com.google.protobuf.Empty;
 import com.mobydrake.inventory.entity.Car;
 import com.mobydrake.inventory.mapper.CarMapper;
@@ -17,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.grpc.server.service.GrpcService;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @GrpcService
