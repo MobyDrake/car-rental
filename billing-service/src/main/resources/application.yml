@@ -1,0 +1,17 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: billing-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rmuser
+    password: rmpassword
+#  kafka:
+#    bootstrap-servers:
+#      - localhost:9092
+#dev:
+#  kafka:
+#    provider: redpanda
+#    topics: invoices-adjust
