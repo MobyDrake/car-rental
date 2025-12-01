@@ -9,6 +9,6 @@ The idea came from the book [Štefanko Martin, Martiška Jan - Quarkus in Action
 3. Rental service is a service for starting and ending rentals.
 4. Inventory service — a database of all vehicles in the fleet.
 5. Billing service is a billing system for rent.
-6. Inventory CLI is an administrative application for fleet management. (_in development_)
+6. Inventory CLI is an administrative application for fleet management.
 
 ![Project Map](project-map.jpg)

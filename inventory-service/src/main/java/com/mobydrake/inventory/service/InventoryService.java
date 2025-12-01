@@ -1,6 +1,5 @@
 package com.mobydrake.inventory.service;
 
-import com.google.protobuf.Empty;
 import com.mobydrake.inventory.entity.Car;
 import com.mobydrake.inventory.mapper.CarMapper;
 import com.mobydrake.inventory.repository.CarRepository;
@@ -61,13 +60,15 @@ public class InventoryService extends InventoryServiceGrpc.InventoryServiceImplB
     }
 
     @Override
-    public void remove(RemoveCarRequest request, StreamObserver<Empty> responseObserver) {
-        Optional<Car> carOptional = carRepository.findByLicensePlateNumber(request.getLicensePlateNumber());
+    public void remove(RemoveCarRequest request, StreamObserver<CarResponse> responseObserver) {
+        final String licensePlateNumber = request.getLicensePlateNumber();
+        Optional<Car> carOptional = carRepository.findByLicensePlateNumber(licensePlateNumber);
         if (carOptional.isEmpty()) {
-            responseObserver.onError(Status.NOT_FOUND.withDescription("Car with id not found").asRuntimeException());
+            String message = "Car with licensePlateNumber[%s] not found".formatted(licensePlateNumber);
+            responseObserver.onError(Status.NOT_FOUND.withDescription(message).asRuntimeException());
         } else {
             carRepository.delete(carOptional.get());
-            responseObserver.onNext(Empty.newBuilder().build());
+            responseObserver.onNext(carMapper.toResponse(carOptional.get()));
             responseObserver.onCompleted();
         }
     }
