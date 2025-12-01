@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,8 +63,9 @@ public class ReservationService {
         return reservationMapper.toDto(reservation);
     }
 
-    public List<CarDto> availability() {
-        Set<Long> reservationCarIds = reservationRepository.findIds();
+    public List<CarDto> availability(LocalDate startDay, LocalDate endDay) {
+        List<Reservation> reservations = reservationRepository.findAllBetweenDates(startDay, endDay);
+        Set<Long> reservationCarIds = reservations.stream().map(Reservation::getCarId).collect(Collectors.toSet());
         return inventoryClient.findAllCars()
                 .stream()
                 .filter(car -> !reservationCarIds.contains(car.id()))

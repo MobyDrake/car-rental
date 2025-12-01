@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface ReservationRepository extends ListCrudRepository<Reservation, Long> {
 
-    @Query("select id from Reservation")
-    Set<Long> findIds();
+    @Query("from Reservation r where r.startDate > :endDay or r.endDate < :startDay")
+    List<Reservation> findAllBetweenDates(LocalDate startDay, LocalDate endDay);
+
 }

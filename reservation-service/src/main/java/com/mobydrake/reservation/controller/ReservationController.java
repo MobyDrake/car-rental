@@ -7,9 +7,15 @@ import com.mobydrake.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -35,7 +41,8 @@ public class ReservationController {
     }
 
     @GetMapping("/availability")
-    public ResponseEntity<@NonNull Collection<CarDto>> availability() {
-        return ResponseEntity.ok(reservationService.availability());
+    public ResponseEntity<@NonNull List<CarDto>> availability(@RequestParam LocalDate start,
+                                                              @RequestParam LocalDate end) {
+        return ResponseEntity.ok(reservationService.availability(start, end));
     }
 }
